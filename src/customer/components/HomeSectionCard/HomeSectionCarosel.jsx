@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import AliceCarousel from "react-alice-carousel";
-import HomeSectionCard from "../HomeSectionCard";
 import { Button } from "@headlessui/react";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import HomeSectionCard from "./HomeSectionCard";
+//import { mens_kurta } from "../../../Data/mens_kurta";
 const HomeSectionCarosel = ({ data, sectionName }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -20,29 +21,29 @@ const HomeSectionCarosel = ({ data, sectionName }) => {
     .map((item) => <HomeSectionCard product={item} />);
   return (
     <div className="border">
-      <h2 className="text-2x1 font-extrabold text-gray-800 py-5">
+      <h2 className="text-2xl font-extrabold text-gray-800 py-5">
         {sectionName}
       </h2>
-      <div className="relative p-5 border">
+      <div className="relative p-5">
         <AliceCarousel
           items={items}
           disableButtonsControls
+          infinite
           responsive={responsive}
           disableDotsControls
           onSlideChanged={syncActiveIndex}
           activeIndex={activeIndex}
         />
-
         {activeIndex !== items.length - 5 && (
           <Button
-            onClick={slidePrev}
             variant="contained"
             className="z-50 bg-white"
+            onClick={slideNext}
             sx={{
               position: "absolute",
               top: "8rem",
               right: "0rem",
-              transform: "translateX(50%) rotate(90 deg)",
+              transform: "translateX(50%) rotate(90deg)",
               bgcolor: "white",
             }}
             aria-label="next"
@@ -52,22 +53,22 @@ const HomeSectionCarosel = ({ data, sectionName }) => {
             />
           </Button>
         )}
-
         {activeIndex !== 0 && (
           <Button
-            onClick={slideNext}
+            onClick={slidePrev}
             variant="contained"
             className="z-50 bg-white"
             sx={{
               position: "absolute",
               top: "8rem",
               left: "0rem",
-              transform: "translateX(-50%) rotate(-90 deg)",
+              transform: "translateX(-50%) rotate(-90deg)",
               bgcolor: "white",
             }}
+            aria-label="next"
           >
             <KeyboardArrowLeftIcon
-              sx={{ transform: "rotate(-90deg)", color: "black" }}
+              sx={{ transform: "rotate(0deg)", color: "black" }}
             />
           </Button>
         )}
